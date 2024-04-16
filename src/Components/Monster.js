@@ -1,37 +1,54 @@
 import React from 'react';
 import ProgressBar from './ProgressBar';
+import { useSelector } from 'react-redux';
+import  loup  from '../assets/wolf-removebg-preview.png';
 
-class Monster extends React.Component {
 
-  
+const Monster = () => {
+  // useSelector est le hook qui va permettre de dire de recupérer les données dans le store
 
-  render() {
-    return (
-      <section>
-        <div className="container">
-          <div className="row">
-            <div className="card-monstre col-sm-12">
-              <div id="monsterCard">
-                <div className="text-center">
-                  <div className="row">
-                    <div className="col-sm-2 offset-sm-3">
-                      <span className="badge badge-danger ml-2 " id="degatSpanMonster"></span>
-                      <img className="img-fluid" src="http://res.publicdomainfiles.com/pdf_view/67/13925387417373.png" alt='monster' />
-                    </div>
+  // Monster est relié au store grace au useSelector donc si on change les données elles vont se mettre a jour automatiquement sans avoir bepsin de rafraichir la page
+  const monster = useSelector((store) => store.fight.monster);
+  console.log(monster);
 
-                    <div id="comboOnMonster" className="col-sm-6">
-
-                    </div>
+  return (
+    <section>
+      <div className="container">
+        <div className="row">
+          <div className="card-monstre col-sm-12">
+            <div id="monsterCard">
+              <div className="text-center">
+                <div className="row justify-content-center">
+                  <div className="col-sm-3 wolf-img-ctn">
+                    <span
+                      className="badge badge-danger ml-2 "
+                      id="degatSpanMonster"
+                    ></span>
+                 
+                    <img
+                      className="img-fluid wolf-img"
+                      src={loup}
+                      alt="monster"
+                      />
+               
                   </div>
+
                 </div>
-                <ProgressBar pv='800' pvMax='800' bgType='bg-danger' faType='fa-heart' barName=' : pv' />
               </div>
+              <ProgressBar
+                pv={monster.pv}
+                pvMax={monster.pvMax}
+                bgType="bg-danger"
+                faType="fa-heart"
+                barName=" : pv"
+              />
             </div>
           </div>
         </div>
-      </section >
-    )
-  }
+      </div>
+    </section>
+  );
 }
+
 
 export default Monster;

@@ -4,34 +4,69 @@ import ProgressBar from './ProgressBar';
 
 
 
-class PlayerCard extends React.Component {
-   
+const PlayerCard = ({ player }) => {
 
-    render() {
-        return (
-            <div key={this.props.player.id} className="col-sm-3 card center" id={`joueur${this.props.player.id}`}>
+  return (
+    <div className="d-flex justify-content-center">
+      <div
+        key={player.id}
+        className="col-md-12 card center position-relative  shadow-lg p-3 mb-5 bg-transparent rounded"
+        id={`joueur${player.id}`}
+      >
+        {!player.canPlay && <div className="cantPlay"></div>}
 
-                <div className="card-body text-center">
-                    <h5 className="card-title">{this.props.player.name}</h5>
-                    <ProgressBar pv={this.props.player.pv} pvMax={this.props.player.pvMax} faType='fa-heart' barName=' : pv ' bgType='bg-danger' />
-                    <ProgressBar pv={this.props.player.mana} pvMax={this.props.player.manaMax} faType='fa-fire-alt' barName=' : mana ' />
+        <div className="card-body text-center">
+          <div className="d-flex justify-content-center">
+            <div className="wolf">
+              <img src={player.image} alt="randomrumble" />
+            </div>
+          </div>
+          <h5 className="card-title fw-bold text-white">{player.name}</h5>
 
-                    <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
-                    <div className="row ">
-                        <div >
-                            <ButtonCapacity player={this.props.player} />
-                            <ButtonCapacity player={this.props.player} />
-                            <ButtonCapacity player={this.props.player} />
-                            <ButtonCapacity player={this.props.player} />
+          <div className=" d-flex flex-column gap-2">
+            <ProgressBar
+              pv={player.pv}
+              pvMax={player.pvMax}
+              faType="fa-heart"
+              barName=" : pv "
+              bgType="bg-danger"
+            />
+            <ProgressBar
+              pv={player.mana}
+              pvMax={player.manaMax}
+              faType="fa-fire-alt"
+              barName=" : mana "
+            />
 
-                        </div>
-                    </div >
-                </div >
+            <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
+            <div className="row p-2 g-col-6">
+              <div>
+                <ButtonCapacity
+                  playerId={player.id}
+                  playerCanPlay={player.canPlay}
+                />
+                <ButtonCapacity
+                  playerId={player.id}
+                  playerCanPlay={player.canPlay}
+                />
+                <ButtonCapacity
+                  playerId={player.id}
+                  playerCanPlay={player.canPlay}
+                />
+                <ButtonCapacity
+                  playerId={player.id}
+                  playerCanPlay={player.canPlay}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-            </div >
-        )
-    }
-}
 
 
 export default PlayerCard;
+
